@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000">
+    <title>Online certificate verification system</title>
+    {% load static %}
+    <link rel="" href="https://fonts.gstatic.com">
+    <link rel="" href="https://ajax.googleapis.com">
+    <link rel="" href="https://apis.google.com">
+    <link rel="" href="https://fonts.googleapis.com">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="/imgs/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{%static 'asets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/helper.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/circle.css' %}">
+    <link rel="stylesheet" href="{%static 'style.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="{%static 'asets/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'asets/js/searchbar.js' %}"></script>
+    <script type="text/javascript" async="" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="error-popup-box">
+        <div class="model-bg"></div>
+        <div class="model-box error-popup">
+            <div class="heading">
+            </div>
+            <div class="model_body">
+                <div class="error_type"></div>
+                <div class="error_type_desc"></div>
+            </div>
+            <div class="model_footer">
+                <span class="btn btn-danger close-model pull-right" onclick="removeError()">Close</span>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container-fluid top_nav">
+            <div class="container pn">
+                <div class="col-md-12 pn">
+                    <div class="row mn">
+                        <div class="col-md-6 mob_hide">
+                            <div class="left_link">
+                                <a href="#" target="_blank" class="top_social_link top_social_link_fb"
+                                    title="SmallSEOTools Facebook"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_tw"
+                                    title="SmallSEOTools Twitter "></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_li"
+                                    title="SmallSEOTools Linkedin"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_yt"
+                                    title="SmallSEOTools YouTube"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mob_pading">
+                            <div class="right_link">
+                                <!-- <a href="#"><i class="glyphicon glyphicon-user"></i>Register</a>
+                                <a href="#"><i class="glyphicon glyphicon-log-in"></i>Login</a> -->
+                                <div class="lang_drop">
+                                    <i class="glyphicon glyphicon-globe mr5"></i>EN<i
+                                        class="glyphicon glyphicon-chevron-down ml10"></i>
+                                    <div class="lang_hover">
+                                        <div class="main_lang">
+                                            <a href="#" class="main_lang_con">
+                                                <div class="main_lang_b">
+                                                    <div class="main_lang_c active"></div>
+                                                </div>
+                                                English - EN
+                                            </a>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lang_drop_sty"></div>
+        <div id="n_lang_drop_sty" style="background:transparent;"></div>
+
+        <div class="container-fluid navigation_container mob_pading">
+            <div class="container pn">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" aria-label="toggle button" class="navbar-toggle"
+                                data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand top_sst_logo" href="#" title="#" style="background-image: url({%static '/asets/images/logo_sprite.png' %})"></a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li class="search_text_hide ">
+                                    <a href="{% url 'homepage' %}" class="plag_improved active">
+                                        Home </a>
+                                </li>
+                                <li class=" search_text_hide"><a href="{% url 'termsofservicepage' %}">Terms of Services</a></li>
+                                <li class="search_text_hide "><a href="{% url 'aboutuspage' %}">About Us</a></li>
+                                <li class="search_text_hide "><a href="{% url 'contactuspage' %}">Contact Us</a>
+                                </li>
+                                <li class="searchbar mob_hide">
+                                </li>
+                                <li class="search_box_main search_box n_search_box" id="srch_togle"
+                                    style="display:none;">
+                                    <label for="top_search">
+                                        <input type="text" aria-label="Search" class="search_field n_search_field inp"
+                                            id="top_search" autocomplete="off"
+                                            placeholder="Type any word to search for SEO tools...">
+                                    </label>
+                                    <div class="search_drop_box n_search_drop_box" style="display: none;">
+                                        <ul></ul>
+                                    </div>
+                                </li>
+                                <li class="last_notify_id" data-notify_id=""> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+     <div style="padding-right:0px !important;padding-left:0px !important; "
+        class="container-fluid mob_pading p10 tool_area_banner">
+
+        <div class="container pn">
+            <div class="col-md-12 col-lg-12 padding0">
+
+                <div class="main-content roshu mob_pading main_content_full">
+                    <div class="col-md-12 col-xs-12">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-lg-12" id="alerts">
+                    </div>
+                    <link rel="stylesheet" type="text/css" href="# ">
+                    <style type="text/css">
+                        .red_heading {
+                            font-family: 'Roboto Slab', serif;
+                            font-weight: 400;
+                            color: #ea5050;
+                            font-size: 22px;
+                        }
+
+                        .red_heading h1 {
+                            font-size: 22px;
+                        }
+
+                        .para_heading {
+                            font-weight: 400;
+                            font-weight: bold;
+                            color: #505050;
+                            font-size: 16px;
+                            font-family: open sans, sans-serif !important;
+                        }
+
+                        .para_parts {
+                            font-weight: 400;
+                            color: #808080;
+                            font-size: 12px;
+                            font-family: open sans, sans-serif !important;
+                        }
+
+                        #tos {
+                            margin-bottom: 20px;
+                            margin-top: 15px;
+                        }
+                    </style>
+                    <div id="tos">
+                        <div class="box_shadow_border ptn">
+                            <div class="pl10 text-left">
+                                <h1 class="red_heading">Term of Services</h1>
+                                <p class="para_parts">At onlinecvtool.com, we are keenly aware of the trust you place in us and our responsibility to protect your privacy. 
+As part of this responsibility, we are sharing with you what information we collect when you use our website analysis tool,
+ why we collect it and how we use it to improve your experience. By using the onlinecvtool.com web  tools, 
+ you consent to the data practices described in this statement</p>
+                                <h3 class="para_heading">Use of Personal Information</h3>
+                                <p class="para_parts">If you subscribe to our emails or newsletter onlinecvtool.com may use your personally identifiable email address to inform you of other products or services available from onlinecvtool.com and its affiliates. onlinecvtool.com may also contact you via surveys to conduct research about your opinion of current services or of potential new services. Please keep in mind that if you directly disclose personally identifiable information or personally sensitive data through the onlinecvtool.com blog, this information may be collected and used by others.
+
+onlinecvtool.com does not sell, rent or lease its customer lists to third parties. onlinecvtool.com may, from time to time, contact you on behalf of external business partners about a particular offering that may be of interest to you. In those cases, your unique personally identifiable information (e-mail, name, address, telephone number) is not transferred to the third party. In addition, onlinecvtool.com may share data with trusted partners to help us perform statistical analysis, send you email or postal mail, provide customer support, or arrange for deliveries. Such third parties are prohibited from using your personal information except to provide these services to onlinecvtool.com, and they are required to maintain the confidentiality of your information.
+
+onlinecvtool.com will disclose your personal information, without notice, only if required to do so by law or in the good faith belief that such action is necessary to: (a) conform to the edicts of the law or comply with legal process served on onlinecvtool.com or the site; (b) protect and defend the rights or property of onlinecvtool.com (including enforcing this agreement); and, (c) act under exigent circumstances to protect the personal safety of users of onlinecvtool.com, or the public
+                                </p>
+                               
+                                <h3 class="para_heading">Information Collection</h3>
+                                <p class="para_parts">All data collected by the onlinecvtool.com tool can be manually accessed by several other means publicly available 
+online (Whois Lookup, Google Cached Pages, etc.). That is why every single report generated on onlinecvtool.com is 
+considered ‘public’ and is thus stored in our database. Furthermore, it can be indexed by search engines. onlinecvtool.com 
+collects and uses website information to operate its website analysis tool and deliver the services you have requested.
+ This information can include: IP address, domain names, estimated visitors, in-site and off-site  analysis, usability, access times 
+ and referring website addresses. This information is used by onlinecvtool.com for the operation of its service and to provide 
+general statistics regarding use of the onlinecvtool.com web tool.</p>
+                                <h3 class="para_heading">Restrictions</h3>
+                                <h3 class="para_heading">You agree that you will not:</h3>
+                                <ul class="para_parts">
+                                    <li>
+                                       Distribute the content for any purpose including without limitation compiling an internal database, redistributing or reproduction of the content by the press or media or through any commercial network, cable or satellite system.
+                                    </li>
+                                    <li>
+                                       Create derivative works of, reverse engineer, decompile, disassemble, adapt, translate, transmit, arrange, modify, copy, bundle, sell, sub-license, export, merge, transfer, adapt, loan, rent, lease, assign, share, outsource, host, publish, make available to any person or otherwise use, either directly or indirectly, the content/tools in whole or in part, in any form or by any means whatsoever, be they physical, electronic or otherwise
+                                    </li>
+                                    <li>
+                                       Permit, allow or do anything that would infringe or otherwise prejudice the proprietary rights of the Company or its licensor’s or allow any third-party to access the content/tools. The restrictions set out in this Agreement shall not apply to the limited extent the restrictions are prohibited applicable law.
+                                    </li>
+                                    <li>
+                                      Use or attempt to use automated website grabbing software (also known as website downloader or website copier software) to save multiple pages from the website for any use, including offline viewing.
+                                    </li>
+                                    <li>
+                                        Use advertisement blocking software to prevent the loading and display of advertisement from the website.
+                                    </li>
+                                    <li>
+                                       Use bots.
+                                    </li>
+                                </ul>
+                                <div class="p10 bg_f5f5f5 mt20 mb20">
+                                    <h3 class="pl15 para_heading">Disclaimer</h3>
+                                    <p class="pl15 para_parts">The tools provided by onlinecvtool.com is not intended for use for any applications without professional advice</p>
+                                </div>
+                                <p class="para_parts">Further, the information contained herein is intended to afford general guidelines on matters of common interest. Visitors are encouraged to consult with SEO experts for advice concerning specific matters before making any decision, and onlinecvtool.com disclaims any responsibility for positions taken by the tools provided by onlinecvtool.com or for any misunderstanding on the part of onlinecvtool.com</p>
+                                <h3 class="para_heading">Security of your Personal Information</h3>
+                                <p class="para_parts">No method of safeguarding information is 100% secure. onlinecvtool.com uses a variety of security technologies and procedures to help protect your personal information from unauthorized access, use or disclosure. onlinecvtool.com secures the personally identifiable information you provide on computer servers in a controlled, secure environment, protected from unauthorized access, use or disclosure. When personal information (such as a credit card number) is transmitted to other websites, it is protected through the use of encryption, such as the Secure Socket Layer (SSL) protocol</p>
+                                <h3 class="para_heading">Changes to this Statement</h3>
+                                <p class="para_parts">onlinecvtool.com will occasionally update this Terms of Service to reflect company and customer feedback. onlinecvtool.com encourages you to periodically review this Terms of Service to be informed of how onlinecvtool.com is protecting your information. When such a change is made, we will update the “Last Updated” date below. Use of this onlinecvtool.com website indicates your acceptance of these Terms of Service</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="asseenon_bg sticky-stopper">
+        <div class="inerasseen container">
+            <div class="tool_heading text-center">
+                <h2>SUPPORTED CERTIFICATES</h2>
+                <div class="heading_border"></div>
+            </div>
+            <div class="mt15 pb15 text-center as_seen_box" id="add_as_seen_on">
+                <a class="aso1"></a>
+                <a class="aso2"></a>
+                <a class="aso3"></a>
+
+                <a class="aso4"></a>
+                <a class="aso5" "></a>
+               
+                
+            </div>
+        </div>
+    </div>
+     <div class=" clearfix">
+            </div>
+            <div class="f_intro_bg_test"></div>
+            <div class="clearfix"></div>
+             <footer>
+        <div class="f_intro_bg text-center">
+            <form class="navbar-form mn" action="https://smallseotools.com/register/">
+                <div class="col-md-6 col-sm-6 dtc pn lang_subscribe">
+                    <div class="equally_centralized">
+                        <img src="https://smallseotools.com/asets/images/form_subcribe_footer.png" width="80"
+                            height="63" class="f_icon" alt="image of sst subcriber">
+                        <span class="f_text">SUBSCRIBE TO OUR NEWSLETTER</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 dtc pn">
+                    <div class="input-group">
+                        <input type="email" name="email" aria-label="Subscribe" placeholder="Enter your Email Address"
+                            class="form-control search_input">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default search_button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="f_description_bg text-center">
+            <div class="f_graph">
+                <div class="container">
+                    <div class="col-lg-1 col-md-1"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 f_logo_box f_contect pn">
+                        <a class="navbar-brand ptn bootom_sst_logo top_sst_logo" href="#"
+                            title="SmallSEOTools.com"></a>
+                        <div class="contect_info col-xs-12 pn">
+                            <p>CONTACT US</p>
+                            <span>onlinecvtool@gmail.com</span>
+                        </div>
+                        <div class="address_info col-xs-12 pn">
+                            <p>ADDRESS</p>
+                            <span>Dehu Phata, <br>MITAOE <br>Alandi,Pune</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 lef_to_right_border f_version">
+                        <p>PROJECT OF  <br> MITAOE STUDENTS </p>
+                        <a href="#" title="Plagiarism Checker Api">
+                            <div class="add_footer_icon f-api ver_img"  style="background-image:url({%static '/asets/images/v-icons.png' %})"></div>
+                        </a>
+                      
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 f_contect" style="min-height: 230px;">
+                        <div class="mor_pages">
+                            <ul class="pn">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms of Services</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pn">
+                <div class="p10 footer">
+                    <div class="container pn">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p class="text-center mn">Copyright © 2012-2021 by <a
+                                    href="#">Online Certificate Verification Tool</a> All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+       
+    </footer>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+            <script src="//apis.google.com/js/client.js" gapi_processed="true"></script>
+
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#blah')
+                                .attr('src', e.target.result)
+                                .width('90%')
+                                .height('80%');
+
+                            $('.drop_sty_mob').hide();
+                            $('.img_sty').hide();
+
+
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+
+            <script>
+                dataLayer = [];
+                var _trrigger_code = '';
+                function removeError() { $(".error-popup-box").hide(); }
+                var base_url_path = '#';
+                $(window).on('load', function () {
+                    _trrigger_code = '1';
+                    var width = $(window).width();
+                    if (width < 768) {
+                        $('#accordion .panel-collapse').hide();
+                        var mob_search_html = $('#sidebar_search').html();
+                        $('#mob_search').html(mob_search_html);
+                    } else {
+                        $('#accordion .panel-collapse').addClass('in');
+                        var web_search_html = $('#mob_search').html();
+                        $('#mob_search').html('');
+                        $('#mob_search_bar').hide();
+                    }
+                });
+
+
+
+
+                // BUG POPUP JS START
+                $("#brIcon").on('click', function () {
+                    var pup = $("#BugReport");
+                    var html = "<script src='https://www.google.com/recaptcha/api.js'><\/script>";
+                    $("head").append(html);
+                    pup.show();
+                });
+                function hidePopup() {
+                    $("#BugReport").css('display', 'none');
+                }
+                function validateEmail(email) {
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                function validatebugcaptcha() {
+                    var bugemail = $("#bugemail").val();
+                    var bugsub = $("#bugsubject").val();
+                    var bugdesc = $("#bugdesc").val();
+                    var submitform = true;
+                    if (!validateEmail(bugemail)) {
+                        showModel('Error', 'Please enter valid email address.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugsub == 'undefined' || bugsub == '') {
+                        showModel('Error', 'Please add subject.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugdesc == 'undefined' || bugdesc == '') {
+                        showModel('Error', 'Please add description.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (submitform) {
+                        $("#bugform").submit();
+                    }
+                }
+                // BUG POPUP JS END
+                if ($(window).width() <= 991 && $(window).width() >= 768) {
+                    $('li.searchbar.mob_hide').click(function () {
+                        $('#HeadSearch').slideToggle();
+                    });
+                }
+
+
+
+
+
+                $.fn.isInViewport = function () {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+                    return elementBottom > viewportTop && elementTop < viewportBottom;
+                };
+
+
+
+
+
+
+
+            </script>
+
+
+
+
+
+</body>
+
+</html>

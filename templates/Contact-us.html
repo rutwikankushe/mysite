@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000">
+    <title>Online certificate verification system</title>
+    {% load static %}
+    <link rel="" href="https://fonts.gstatic.com">
+    <link rel="" href="https://ajax.googleapis.com">
+    <link rel="" href="https://apis.google.com">
+    <link rel="" href="https://fonts.googleapis.com">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="/imgs/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{%static 'asets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/helper.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/circle.css' %}">
+    <link rel="stylesheet" href="{%static 'style.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="{%static 'asets/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'asets/js/searchbar.js' %}"></script>
+    <script type="text/javascript" async="" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="error-popup-box">
+        <div class="model-bg"></div>
+        <div class="model-box error-popup">
+            <div class="heading">
+            </div>
+            <div class="model_body">
+                <div class="error_type"></div>
+                <div class="error_type_desc"></div>
+            </div>
+            <div class="model_footer">
+                <span class="btn btn-danger close-model pull-right" onclick="removeError()">Close</span>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container-fluid top_nav">
+            <div class="container pn">
+                <div class="col-md-12 pn">
+                    <div class="row mn">
+                        <div class="col-md-6 mob_hide">
+                            <div class="left_link">
+                                <a href="#" target="_blank" class="top_social_link top_social_link_fb"
+                                    title="SmallSEOTools Facebook"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_tw"
+                                    title="SmallSEOTools Twitter "></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_li"
+                                    title="SmallSEOTools Linkedin"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_yt"
+                                    title="SmallSEOTools YouTube"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mob_pading">
+                            <div class="right_link">
+                                <a href="#"><i class="glyphicon glyphicon-user"></i>Register</a>
+                                <a href="#"><i class="glyphicon glyphicon-log-in"></i>Login</a>
+                                <div class="lang_drop">
+                                    <i class="glyphicon glyphicon-globe mr5"></i>EN<i
+                                        class="glyphicon glyphicon-chevron-down ml10"></i>
+                                    <div class="lang_hover">
+                                        <div class="main_lang">
+                                            <a href="#" class="main_lang_con">
+                                                <div class="main_lang_b">
+                                                    <div class="main_lang_c active"></div>
+                                                </div>
+                                                English - EN
+                                            </a>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lang_drop_sty"></div>
+        <div id="n_lang_drop_sty" style="background:transparent;"></div>
+
+        <div class="container-fluid navigation_container mob_pading">
+            <div class="container pn">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" aria-label="toggle button" class="navbar-toggle"
+                                data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand top_sst_logo" href="#" title="#"></a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li class="search_text_hide ">
+                                    <a href="{% url 'homepage' %}" class="plag_improved active">
+                                        Home </a>
+                                </li>
+                                <li class=" search_text_hide"><a href="{% url 'termsofservicepage' %}">Terms of Services</a></li>
+                                <li class="search_text_hide "><a href="{% url 'aboutuspage' %}">About Us</a></li>
+                                <li class="search_text_hide "><a href="{% url 'contactuspage' %}">Contact Us</a>
+                                </li>
+                                <li class="searchbar mob_hide">
+                                </li>
+                                <li class="search_box_main search_box n_search_box" id="srch_togle"
+                                    style="display:none;">
+                                    <label for="top_search">
+                                        <input type="text" aria-label="Search" class="search_field n_search_field inp"
+                                            id="top_search" autocomplete="off"
+                                            placeholder="Type any word to search for SEO tools...">
+                                    </label>
+                                    <div class="search_drop_box n_search_drop_box" style="display: none;">
+                                        <ul></ul>
+                                    </div>
+                                </li>
+                                <li class="last_notify_id" data-notify_id=""> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+<div style="padding-right:0px !important;padding-left:0px !important; "
+    class="container-fluid mob_pading p10 tool_area_banner">
+
+    <div class="container pn">
+        <div class="col-md-12 col-lg-12 padding0">
+
+            <div class="main-content roshu mob_pading main_content_full">
+                <div class="col-md-12 col-xs-12">
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 col-lg-12" id="alerts">
+                </div>
+                <style>
+                    .main_area_box {
+                        width: 65%;
+                        margin: 0 auto;
+                        margin-top: 3%;
+                        margin-bottom: 15%;
+                    }
+
+                    .sec_area_box {
+                        width: 100%;
+                        margin: 0 auto;
+                    }
+
+                    .round_input {
+                        padding: 13px 25px;
+                        font-size: 13px;
+                        color: #808080;
+                        display: block;
+                        width: 100%;
+                        line-height: 1.42857143;
+                        background-color: #fff;
+                        background-image: none;
+                        border: 1px solid #dddddd;
+                        border-radius: 24px;
+                        outline: 0;
+                    }
+
+                    @media (max-width: 640px) {
+                        .main_area_box {
+                            width: 100%;
+                        }
+
+                        .sec_area_box {
+                            width: 100% !important;
+                        }
+                    }
+
+                    .blue_border {
+                        border-bottom: 5px solid #1e6fb7;
+                        background-color: #ffffff;
+                    }
+
+                    .heading_main {
+                        font-size: 24px;
+                        color: #505050;
+
+                        font-weight: normal;
+                        text-align: center;
+                    }
+
+                    .heading_main h1 {
+                        font-size: 24px;
+                    }
+
+                    .submit_butt {
+                        background-color: #ea5050;
+                        color: #ffffff;
+                    }
+
+                    .heading_text_contact {
+                        color: #808080;
+                        font-size: 13px;
+                        text-align: center;
+                        font-weight: 600;
+                    }
+
+                    .text_mail {
+                        color: #808080;
+                        font-size: 13px;
+                        text-align: left;
+                        font-weight: 400;
+                    }
+
+                    .tags_label {
+                        margin-bottom: 0px;
+                        color: #505050;
+                        font-size: 13px;
+                    }
+
+                    .contact-etxt_area {
+                        display: block;
+                        width: 100%;
+                        height: 150px;
+                        padding: 10px 10px;
+                        font-size: 13px;
+                        line-height: 1.42857143;
+                        color: #555;
+                        background-color: #fff;
+                        border: 1px solid #dddddd;
+                        border-radius: 4px;
+                        outline: 0;
+                        resize: none;
+                    }
+
+                    .character_1000 {
+                        color: #808080;
+                        font-size: 12px;
+                        font-weight: 400;
+                        margin-top: 10px;
+                    }
+
+                    hr {
+                        margin: 35px -100px;
+                        border-top: 1px solid #dddddd;
+                    }
+
+                    .dot_circle .checkmark {
+                        border-radius: 20px;
+                        height: 17px;
+                        width: 17px;
+                    }
+
+                    .dot_circle .checkmark:after {
+                        top: 2.5px;
+                        left: 2.5px;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        background: #d1d1d1;
+                        border: none;
+                        background: #0f804a;
+                    }
+
+                    .w120 {
+                        width: 120px;
+                    }
+                </style>
+                <div class="container mob_pading">
+                    <div class="col-md-12 col-lg-12 pn">
+                        <div class="main_area_box box_shadow_border blue_border">
+                            <div class="sec_area_box">
+                                <div class="heading_main mb10">
+                                    <h1> Contact Us </h1>
+                                </div>
+                                <p class="heading_text_contact">We would love to hear from you! Please fill out this
+                                    form and we will get in touch with you shortly.</p>
+                                <hr>
+                                <form method="post" action="" id="contactSubForm">
+                                    <div class="col-md-12 pn mb10">
+                                        <div class="col-md-6">
+                                            <label class="tags_label"> First Name </label>
+                                            <div class="input-group wp100 inline_flex">
+                                                <input type="text" name="f_name" value="" required="" class="round_input
+                                mt10">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="tags_label"> Last Name </label>
+                                            <div class="input-group wp100 inline_flex">
+                                                <input type="text" name="l_name" value="" required=""
+                                                    class="round_input mt10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 pn mb10">
+                                        <div class="col-md-6">
+                                            <label class="tags_label"> Email Address </label>
+                                            <div class="input-group wp100 inline_flex">
+                                                <input type="email" name="email" value="" required=""
+                                                    class="round_input mt10">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="tags_label"> Confirm Email </label>
+                                            <div class="input-group wp100 inline_flex">
+                                                <input type="email" name="email2" value="" required=""
+                                                    class="round_input mt10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text_mail pl15">Please include the valid email address - to allow us
+                                        to reach you directly</p>
+                                    <div class="col-md-12">
+                                        <label class="tags_label"> Enter website URL </label>
+                                        <div class="input-group wp100 inline_flex">
+                                            <input type="url" name="web" required="" class="round_input mt20">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 dot_circle mt15 mb10">
+                                        <label class="tags_label mb10"> Reason to Contact us </label>
+                                        <div class="input-group wp100">
+                                            <label
+                                                class="check_area dark_grey ptn mrn col-lg-2 col-md-3 col-sm-3 col-xs-12 fw400 pn">
+                                                <input class="" type="radio" id="dprt" value="SEO Tools" name="dprt"
+                                                    checked="">
+                                                <span class="checkmark"></span>
+                                                Quries
+                                            </label>
+                                            <label
+                                                class="check_area dark_grey ptn mrn fw400 col-lg-2 col-md-3 col-sm-4 col-xs-12 pn">
+                                                <input class="" type="radio" id="dprt" value="Advertisement"
+                                                    name="dprt">
+                                                <span class="checkmark"></span>
+                                                Advertisement
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt10">
+                                        <label class="tags_label"> Description </label>
+                                        <div class="input-group wp100 inline_flex">
+                                            <textarea class="contact-etxt_area mt10" name="msg" id="msgB"></textarea>
+                                        </div>
+                                        <label class="character_1000"><span id="charCount">0</span> of 1000 max
+                                            characters</label>
+                                    </div>
+                                    <div class="col-md-12 mb20">
+                                        <div class="input-group inline_flex">
+                                            <div>
+                                                <div class="grecaptcha-badge" data-style="bottomright"
+                                                    style="width: 256px; height: 60px; position: fixed; visibility: hidden; display: block; transition: right 0.3s ease 0s; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;">
+                                                    <div class="grecaptcha-logo"><iframe title="reCAPTCHA"
+                                                            src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcA_SsUAAAAAJT5iC8hzHl_zLL8tcyi6sxSxnxJ&amp;co=aHR0cHM6Ly9zbWFsbHNlb3Rvb2xzLmNvbTo0NDM.&amp;hl=en-GB&amp;v=539Evs44yecoSf-lkJBQzKKj&amp;size=invisible&amp;cb=jsrn17uo62p7"
+                                                            width="256" height="60" role="presentation"
+                                                            name="a-896icufl72rv" frameborder="0" scrolling="no"
+                                                            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                                                    </div>
+                                                    <div class="grecaptcha-error"></div><textarea
+                                                        id="g-recaptcha-response" name="g-recaptcha-response"
+                                                        class="g-recaptcha-response"
+                                                        style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                                                </div><iframe style="display: none;"></iframe>
+                                            </div><input type="submit" id="contactSub" name="submitForm"
+                                                value="Submit Now" required=""
+                                                class="round_input mt20 fs14 fw600 submit_butt">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+    <div class="asseenon_bg sticky-stopper">
+        <div class="inerasseen container">
+            <div class="tool_heading text-center">
+                <h2>SUPPORTED CERTIFICATES</h2>
+                <div class="heading_border"></div>
+            </div>
+            <div class="mt15 pb15 text-center as_seen_box" id="add_as_seen_on">
+                <a class="aso1"></a>
+                <a class="aso2"></a>
+                <a class="aso3"></a>
+
+                <a class="aso4"></a>
+                <a class="aso5" "></a>
+               
+                
+            </div>
+        </div>
+    </div>
+     <div class=" clearfix">
+            </div>
+            <div class="f_intro_bg_test"></div>
+            <div class="clearfix"></div>
+            <footer>
+        <div class="f_intro_bg text-center">
+            <form class="navbar-form mn" action="https://smallseotools.com/register/">
+                <div class="col-md-6 col-sm-6 dtc pn lang_subscribe">
+                    <div class="equally_centralized">
+                        <img src="https://smallseotools.com/asets/images/form_subcribe_footer.png" width="80"
+                            height="63" class="f_icon" alt="image of sst subcriber">
+                        <span class="f_text">SUBSCRIBE TO OUR NEWSLETTER</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 dtc pn">
+                    <div class="input-group">
+                        <input type="email" name="email" aria-label="Subscribe" placeholder="Enter your Email Address"
+                            class="form-control search_input">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default search_button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="f_description_bg text-center">
+            <div class="f_graph">
+                <div class="container">
+                    <div class="col-lg-1 col-md-1"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 f_logo_box f_contect pn">
+                        <a class="navbar-brand ptn bootom_sst_logo top_sst_logo" href="#"
+                            title="SmallSEOTools.com"></a>
+                        <div class="contect_info col-xs-12 pn">
+                            <p>CONTACT US</p>
+                            <span>onlinecvtool@gmail.com</span>
+                        </div>
+                        <div class="address_info col-xs-12 pn">
+                            <p>ADDRESS</p>
+                            <span>Dehu Phata, <br>MITAOE <br>Alandi,Pune</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 lef_to_right_border f_version">
+                        <p>PROJECT OF  <br> MITAOE STUDENTS </p>
+                        <a href="#" title="Plagiarism Checker Api">
+                            <div class="add_footer_icon f-api ver_img"  style="background-image:url({%static '/asets/images/v-icons.png' %})"></div>
+                        </a>
+                      
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 f_contect" style="min-height: 230px;">
+                        <div class="mor_pages">
+                            <ul class="pn">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms of Services</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pn">
+                <div class="p10 footer">
+                    <div class="container pn">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p class="text-center mn">Copyright © 2012-2021 by <a
+                                    href="#">Online Certificate Verification Tool</a> All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+       
+    </footer>
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+            <script src="//apis.google.com/js/client.js" gapi_processed="true"></script>
+
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#blah')
+                                .attr('src', e.target.result)
+                                .width('90%')
+                                .height('80%');
+
+                            $('.drop_sty_mob').hide();
+                            $('.img_sty').hide();
+
+
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+
+            <script>
+                dataLayer = [];
+                var _trrigger_code = '';
+                function removeError() { $(".error-popup-box").hide(); }
+                var base_url_path = '#';
+                $(window).on('load', function () {
+                    _trrigger_code = '1';
+                    var width = $(window).width();
+                    if (width < 768) {
+                        $('#accordion .panel-collapse').hide();
+                        var mob_search_html = $('#sidebar_search').html();
+                        $('#mob_search').html(mob_search_html);
+                    } else {
+                        $('#accordion .panel-collapse').addClass('in');
+                        var web_search_html = $('#mob_search').html();
+                        $('#mob_search').html('');
+                        $('#mob_search_bar').hide();
+                    }
+                });
+
+
+
+
+                // BUG POPUP JS START
+                $("#brIcon").on('click', function () {
+                    var pup = $("#BugReport");
+                    var html = "<script src='https://www.google.com/recaptcha/api.js'><\/script>";
+                    $("head").append(html);
+                    pup.show();
+                });
+                function hidePopup() {
+                    $("#BugReport").css('display', 'none');
+                }
+                function validateEmail(email) {
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                function validatebugcaptcha() {
+                    var bugemail = $("#bugemail").val();
+                    var bugsub = $("#bugsubject").val();
+                    var bugdesc = $("#bugdesc").val();
+                    var submitform = true;
+                    if (!validateEmail(bugemail)) {
+                        showModel('Error', 'Please enter valid email address.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugsub == 'undefined' || bugsub == '') {
+                        showModel('Error', 'Please add subject.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugdesc == 'undefined' || bugdesc == '') {
+                        showModel('Error', 'Please add description.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (submitform) {
+                        $("#bugform").submit();
+                    }
+                }
+                // BUG POPUP JS END
+                if ($(window).width() <= 991 && $(window).width() >= 768) {
+                    $('li.searchbar.mob_hide').click(function () {
+                        $('#HeadSearch').slideToggle();
+                    });
+                }
+
+
+
+
+
+                $.fn.isInViewport = function () {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+                    return elementBottom > viewportTop && elementTop < viewportBottom;
+                };
+
+
+
+
+
+
+
+            </script>
+
+
+
+
+
+</body>
+
+</html>

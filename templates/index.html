@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000">
+    <title>Online certificate verification system</title>  
+    {% load static %}
+    <link rel="" href="https://fonts.gstatic.com">
+    <link rel="" href="https://ajax.googleapis.com">
+    <link rel="" href="https://apis.google.com">
+    <link rel="" href="https://fonts.googleapis.com">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet"
+        type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="/imgs/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{%static 'asets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'style.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="{%static 'asets/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'asets/js/searchbar.js' %}"></script>
+    <script type="text/javascript" async="" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+   
+   
+</head>
+
+<body>
+  
+
+
+    <!-- <div class="error-popup-box">
+        <div class="model-bg"></div>
+        <div class="model-box error-popup">
+            <div class="heading">
+            </div>
+            <div class="model_body">
+                <div class="error_type"></div>
+                <div class="error_type_desc"></div>
+            </div>
+            <div class="model_footer">
+                <span class="btn btn-danger close-model pull-right" onclick="removeError()">Close</span>
+            </div>
+        </div>
+    </div> -->
+    <header>
+        <div class="container-fluid top_nav">
+            <div class="container pn">
+                <div class="col-md-12 pn">
+                    <div class="row mn">
+                        <div class="col-md-6 mob_hide">
+                            <div class="left_link">
+                                <a href="#" target="_blank"
+                                    class="top_social_link top_social_link_fb" title="SmallSEOTools Facebook"></a>
+                                <a href="#" target="_blank"
+                                    class="top_social_link top_social_link_tw" title="SmallSEOTools Twitter "></a>
+                                <a href="#" target="_blank"
+                                    class="top_social_link top_social_link_li" title="SmallSEOTools Linkedin"></a>
+                                <a href="#" target="_blank"
+                                    class="top_social_link top_social_link_yt" title="SmallSEOTools YouTube"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mob_pading">
+                            <div class="right_link">
+                                <!-- <a href="#"><i
+                                        class="glyphicon glyphicon-user"></i>Register</a>
+                                <a href="#"><i
+                                        class="glyphicon glyphicon-log-in"></i>Login</a> -->
+                                <div class="lang_drop">
+                                    <i class="glyphicon glyphicon-globe mr5"></i>EN<i
+                                        class="glyphicon glyphicon-chevron-down ml10"></i>
+                                    <div class="lang_hover">
+                                        <div class="main_lang">
+                                            <a href="#"
+                                                class="main_lang_con">
+                                                <div class="main_lang_b">
+                                                    <div class="main_lang_c active"></div>
+                                                </div>
+                                                English - EN
+                                            </a>
+                                        </div>
+                                     
+                                       
+                                        
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lang_drop_sty"></div>
+        <div id="n_lang_drop_sty" style="background:transparent;"></div>
+
+        <div class="container-fluid navigation_container mob_pading">
+            <div class="container pn">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" aria-label="toggle button" class="navbar-toggle"
+                                data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand top_sst_logo" href="#" title="#" style="background-image: url({%static '/asets/images/logo_sprite.png' %})"></a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+                               
+                                <li class="search_text_hide ">
+                                    <a href="{% url 'homepage' %}"
+                                        class="plag_improved active">
+                                        Home </a>
+                                </li>
+                                <li class=" search_text_hide"><a href="{% url 'termsofservicepage' %}">Terms of Services</a></li>
+                                <li class="search_text_hide "><a
+                                        href="{% url 'aboutuspage' %}">About Us</a></li>
+                                <li class="search_text_hide "><a
+                                        href="{% url 'contactuspage' %}">Contact Us</a>
+                                </li>
+                                <li class="searchbar mob_hide">
+                                </li>
+                                <li class="search_box_main search_box n_search_box" id="srch_togle"
+                                    style="display:none;">
+                                    <label for="top_search">
+                                        <input type="text" aria-label="Search" class="search_field n_search_field inp"
+                                            id="top_search" autocomplete="off"
+                                            placeholder="Type any word to search for SEO tools...">
+                                    </label>
+                                    <div class="search_drop_box n_search_drop_box" style="display: none;">
+                                        <ul></ul>
+                                    </div>
+                                </li>
+                                <li class="last_notify_id" data-notify_id=""> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid pn tool_area_banner">
+
+        <div class="after_navbar" style="min-height:100px;overflow:hidden">
+           
+        </div>
+        <div class="clearfix"></div>
+        <div class="container pn">
+            <div class="main-content">
+                <div class="col-md-12 col-lg-12" id="alerts">
+                </div>
+                <div id="LodeGif" class="LodeGif"><img src="{%static 'asets/images/loader.gif' %}"
+                        class="img-responsive mob_hide"></div>
+                <div id="imgtotext">
+                    <div class="tool_box box_shadow_border">
+                        <div class="tool_heading text-center">
+                            <h1 >Online Certificate Verification  Tool</h1>
+                            <p>We present an online certificate verification  service to check the authenticity of the cerificate. 
+                                Upload photo to our upload certificate box , click on check certificate and get your result
+                                 instantly.</p>
+                            <div class="col-md-12 row">
+                                
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <form action="/Online_Cerificate_Verification_Tool_Verification_Result/" method="post"
+                            enctype="multipart/form-data" id="ocr">
+                            {% csrf_token %}
+                            <div class="col-md-12 pn">
+                                <div id="img_error"></div>
+                                <div class="col-md-12 textarea_box doted_br_hide">
+                                    <div class="col-md-12 pn">
+                                        <label class="input-group text-center img_bg" for="fileupload">
+                                            <span class="wp100">
+                                                
+                                                     {% if raw_url  %}
+                                                    <img style="width:90%;height:80%;" id="blah" src="{{raw_url}}">
+                                                    {% else %}
+                                                     <img src="{%static 'asets/images/drag_drop.png' %}" alt=""
+                                                    class="img_sty"><br>
+                                                   
+                                                <input type="file" onchange="readURL(this);"  style="display:none;" id="fileupload" name="image"
+                                                     class="plc_sty_mob" required>
+                                                    <img id="blah"  alt="" />
+                                                <span class="drop_sty_mob" src="#" id="img_name">upload certificate</span>
+                                                    <!-- <img  style="width:90%;height:80%;" id="blah" src="{{edit_url}}"> -->
+                                                    {% endif %}
+                                                    
+                                            </span>
+                                        </label>
+                                        <!-- <div class="col-md-12 col-sm-12 col-xs-12 pn new_sty">
+                                            <div class="col-md-6 col-sm-5 col-xs-8 text-left pn">
+                                                <label class="input-group img_input_box">
+                                                    <span class="input-group-addon img_input_addon">
+                                                        <i class="glyphicon glyphicon-link"></i>
+                                                    </span>
+                                                    <input type="url" name="url" aria-label="imgUrl" id="imgUrl"
+                                                        autocomplete="off" class="form-control img_input_style"
+                                                        placeholder="Enter Image Path: (Image URL)">
+                                                </label>
+                                            </div>
+                                            <div class="col-md-6 col-sm-7 col-xs-4 pn text-right">
+                                                <div class="input_lable hidden-xs">Choose From:</div>
+                                                
+                                                <span class="google-drive">
+                                                    <span class="btn google_drive_style gdrive-in-btn gdrivebtn"
+                                                        id="google" onclick="onApiLoad()"
+                                                        data-name=".png,.jpg,.jpeg,.gif">
+                                                        <small class="ml20 fw600">Google Drive</small>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <!-- Input Text:
+<input type="text" name="param" required><br><br> -->
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        
+                                    </div>
+                                </div>
+                                <div class="button_box text-center">
+                                     {% if raw_url  %}
+                                   <input  type="submit" name="sub" value="Certificate Checked" disabled style="background-color: #61e087; box-shadow: 0 2px #0c9517;" class="check_resbtn ">
+                                   {% else %}
+                                   <input  type="submit" name="sub" value="Check Certificate"  class="check_resbtn ">
+                                   {% endif %}
+                                   
+                                    <!-- <input onclick="location.href='{% url 'script' %}'" type="button" name="sub" value="Upload Certificate" class="check_resbtn "> -->
+                                    <!-- <a href="#"
+                                        rel="nofollow noopner" target="_blank" style="text-decoration: none"
+                                        class="check_resbtn" id="grammarbtn" onclick="push_triggers('ocr GC')">Check Certificate</a> -->
+                                        <!-- <button onclick="location.href='{% url 'script' %}'">Execute Script</button> 
+                                        <hr> -->
+                                       
+                                </div>
+                            <hr>
+                                       {% if data %}
+                                        {{data}}
+                                        {% endif %}
+                               <br>
+                               
+                              
+                               {{data_external}}
+                               <span style="color: rgba(0, 37, 105, 0.911);" class="tool_heading text-center">
+                                  <h1>{{data1}}</h1> 
+                               </span>
+                               
+                           
+                                <!-- <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="__hmmm__" data-name="hmmmm_nana_ABA" style="height: 0px;">
+                                            <span class="text-center hidden ____hmmmmmm"><a
+                                                    href="#" title="read more"
+                                                    target="_blank" rel="nofollow noopener" class="pic3"></a></span>
+                                           
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+
+                   
+                   
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default accordion_box">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h2 class="panel-title"><a class="acordion_link collapsed" role="button"
+                                        data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                        aria-expanded="false" aria-controls="collapseOne">
+                                        <span>WHAT IS ONLINE CERIFICATE VERIFICATION TOOL?</span></a></h2>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
+                                aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body acordion_body">
+                                    <p>
+                                        We observed that nowadays students make fake certificates and submit it to their respective colleges. 
+                                        <p>The problem found during verification of student’s certificate was so much that there were cases 
+                                        of employers spending lot of money in order to verify the authenticity of certificate presented to 
+                                        them during interviews.</p> 
+                                    <p>There is always a time delay in the manual method of certificate verification
+                                    </p>
+                                    <p>
+                                        To provides easy access for organizations to check for the validity of the certificate of their employees remotely.</p>
+                                        <p>To design a system that can help to minimize the high rate of manipulation and falsification of certificates in higher institutions.</p>                         
+                                         <p>To resolve the issue of manual verification of certificates.</p>
+                                        <p>To easily confirm the authenticity of any certificate by students </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default accordion_box">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h2 class="panel-title"><a class="acordion_link collapsed" role="button"
+                                        data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                        <span>HOW ONLINE CERTIFICATE VERIFICATION TOOL (CVT) WORKS??</span></a></h2>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                aria-labelledby="headingOne" aria-expanded="false">
+                                <div class="panel-body acordion_body">
+                                    <p>
+                                    This is how the proposed system will work. Sequences of steps for implementation of the system are as follow: 
+
+                                    </p>
+                                    <p>
+                                        Provide a certificate with a certificate issuer link in it.
+
+                                    </p>
+                                    <p>
+                                        Convert the image into text to get a required link to the certificate issuer.
+
+                                    </p>
+                                    <p>
+                                        Comparing the obtained information with which is stored in the issuers database.
+
+                                    </p>
+                                    <p>
+                                        Once the comparison is done, verify if the certificate is legit or forged.
+
+                                    </p>
+                                    <p>
+                                        After successful verification, print the authenticate certificate
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div> 
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+         
+            
+        </div>
+    </div>
+   
+    <div class="asseenon_bg sticky-stopper">
+        <div class="inerasseen container">
+            <div class="tool_heading text-center">
+                <h2>SUPPORTED CERTIFICATES</h2>
+                <div class="heading_border"></div>
+            </div>
+            <div class="mt15 pb15 text-center as_seen_box" id="add_as_seen_on">
+                 <a class="aso1"></a>
+                <a class="aso2"></a>
+                 <a class="aso3"></a>
+
+                <a class="aso4" ></a>
+                <a class="aso5" "></a>
+               
+                
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="f_intro_bg text-center">
+            <form class="navbar-form mn" action="https://smallseotools.com/register/">
+                <div class="col-md-6 col-sm-6 dtc pn lang_subscribe">
+                    <div class="equally_centralized">
+                        <img src="https://smallseotools.com/asets/images/form_subcribe_footer.png" width="80"
+                            height="63" class="f_icon" alt="image of sst subcriber">
+                        <span class="f_text">SUBSCRIBE TO OUR NEWSLETTER</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 dtc pn">
+                    <div class="input-group">
+                        <input type="email" name="email" aria-label="Subscribe" placeholder="Enter your Email Address"
+                            class="form-control search_input">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default search_button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="f_description_bg text-center">
+            <div class="f_graph">
+                <div class="container">
+                    <div class="col-lg-1 col-md-1"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 f_logo_box f_contect pn">
+                        <a class="navbar-brand ptn bootom_sst_logo top_sst_logo" href="#"
+                            title="SmallSEOTools.com"></a>
+                        <div class="contect_info col-xs-12 pn">
+                            <p>CONTACT US</p>
+                            <span>onlinecvtool@gmail.com</span>
+                        </div>
+                        <div class="address_info col-xs-12 pn">
+                            <p>ADDRESS</p>
+                            <span>Dehu Phata, <br>MITAOE <br>Alandi,Pune</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 lef_to_right_border f_version">
+                        <p>PROJECT OF  <br> MITAOE STUDENTS </p>
+                        <a href="#" title="Plagiarism Checker Api">
+                            <div class="add_footer_icon f-api ver_img"  style="background-image:url({%static '/asets/images/v-icons.png' %})"></div>
+                        </a>
+                      
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 f_contect" style="min-height: 230px;">
+                        <div class="mor_pages">
+                            <ul class="pn">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms of Services</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pn">
+                <div class="p10 footer">
+                    <div class="container pn">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p class="text-center mn">Copyright © 2012-2021 by <a
+                                    href="#">Online Certificate Verification Tool</a> All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+       
+    </footer>
+   
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
+    <script src="//apis.google.com/js/client.js" gapi_processed="true"></script>
+  
+   <script>
+       function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width('90%')
+                        .height('80%');
+                    
+                    $('.drop_sty_mob').hide();
+                    $('.img_sty').hide();
+                   
+                    
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+   </script>
+   
+    <script>
+        dataLayer = [];
+        var _trrigger_code = '';
+        function removeError() { $(".error-popup-box").hide(); }
+        var base_url_path = '#';
+        $(window).on('load', function () {
+            _trrigger_code = '1';
+            var width = $(window).width();
+            if (width < 768) {
+                $('#accordion .panel-collapse').hide();
+                var mob_search_html = $('#sidebar_search').html();
+                $('#mob_search').html(mob_search_html);
+            } else {
+                $('#accordion .panel-collapse').addClass('in');
+                var web_search_html = $('#mob_search').html();
+                $('#mob_search').html('');
+                $('#mob_search_bar').hide();
+            }
+        });
+      
+        
+       
+        
+      
+        // BUG POPUP JS END
+        if ($(window).width() <= 991 && $(window).width() >= 768) {
+            $('li.searchbar.mob_hide').click(function () {
+                $('#HeadSearch').slideToggle();
+            });
+        }
+
+       
+       
+       
+        
+        $.fn.isInViewport = function () {
+            var elementTop = $(this).offset().top;
+            var elementBottom = elementTop + $(this).outerHeight();
+            var viewportTop = $(window).scrollTop();
+            var viewportBottom = viewportTop + $(window).height();
+            return elementBottom > viewportTop && elementTop < viewportBottom;
+        };
+        
+        
+        var search_append = '<script src="https://smallseotools.com/asets/js/bootstrap.min.js"><\/script><script src="https://smallseotools.com/asets/js/searchbar.js"><\/script>';
+        $('head').append(search_append);
+        window.addEventListener("load", function () {
+            $('div.col-md-12.mob_pading.row').removeClass('mob_pading');
+            window.addEventListener("mousedown", awe_load_function);
+            window.addEventListener("mousemove", awe_load_function);
+            window.addEventListener("mouseup", awe_load_function);
+            window.addEventListener("touchstart", awe_load_function);
+            window.addEventListener("keydown", awe_load_function);
+        });
+       
+
+       
+        
+     </script>
+   
+
+   
+
+   
+</body>
+
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000">
+    <title>Online certificate verification system</title>
+    {% load static %}
+    <link rel="" href="https://fonts.gstatic.com">
+    <link rel="" href="https://ajax.googleapis.com">
+    <link rel="" href="https://apis.google.com">
+    <link rel="" href="https://fonts.googleapis.com">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <link rel="shortcut icon" href="/imgs/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="{%static 'asets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/helper.css' %}">
+    <link rel="stylesheet" href="{%static 'asets/css/circle.css' %}">
+    <link rel="stylesheet" href="{%static 'style.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script src="{%static 'asets/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'asets/js/searchbar.js' %}"></script>
+    <script type="text/javascript" async="" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+     
+
+
+
+</head>
+
+<body>
+
+
+
+    <div class="error-popup-box">
+        <div class="model-bg"></div>
+        <div class="model-box error-popup">
+            <div class="heading">
+            </div>
+            <div class="model_body">
+                <div class="error_type"></div>
+                <div class="error_type_desc"></div>
+            </div>
+            <div class="model_footer">
+                <span class="btn btn-danger close-model pull-right" onclick="removeError()">Close</span>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container-fluid top_nav">
+            <div class="container pn">
+                <div class="col-md-12 pn">
+                    <div class="row mn">
+                        <div class="col-md-6 mob_hide">
+                            <div class="left_link">
+                                <a href="#" target="_blank" class="top_social_link top_social_link_fb"
+                                    title="SmallSEOTools Facebook"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_tw"
+                                    title="SmallSEOTools Twitter "></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_li"
+                                    title="SmallSEOTools Linkedin"></a>
+                                <a href="#" target="_blank" class="top_social_link top_social_link_yt"
+                                    title="SmallSEOTools YouTube"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mob_pading">
+                            <div class="right_link">
+                                <a href="#"><i class="glyphicon glyphicon-user"></i>Register</a>
+                                <a href="#"><i class="glyphicon glyphicon-log-in"></i>Login</a>
+                                <div class="lang_drop">
+                                    <i class="glyphicon glyphicon-globe mr5"></i>EN<i
+                                        class="glyphicon glyphicon-chevron-down ml10"></i>
+                                    <div class="lang_hover">
+                                        <div class="main_lang">
+                                            <a href="#" class="main_lang_con">
+                                                <div class="main_lang_b">
+                                                    <div class="main_lang_c active"></div>
+                                                </div>
+                                                English - EN
+                                            </a>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lang_drop_sty"></div>
+        <div id="n_lang_drop_sty" style="background:transparent;"></div>
+
+        <div class="container-fluid navigation_container mob_pading">
+            <div class="container pn">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" aria-label="toggle button" class="navbar-toggle"
+                                data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                           <a class="navbar-brand top_sst_logo" href="#" title="#" style="background-image: url({%static '/asets/images/logo_sprite.png' %})"></a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li class="search_text_hide ">
+                                    <a href="{% url 'homepage' %}" class="plag_improved active">
+                                        Home </a>
+                                </li>
+                                <li class=" search_text_hide"><a href="{% url 'termsofservicepage' %}">Terms of Services</a></li>
+                                <li class="search_text_hide "><a href="{% url 'aboutuspage' %}">About Us</a></li>
+                                <li class="search_text_hide "><a href="{% url 'contactuspage' %}">Contact Us</a>
+                                </li>
+                                <li class="searchbar mob_hide">
+                                </li>
+                                <li class="search_box_main search_box n_search_box" id="srch_togle"
+                                    style="display:none;">
+                                    <label for="top_search">
+                                        <input type="text" aria-label="Search" class="search_field n_search_field inp"
+                                            id="top_search" autocomplete="off"
+                                            placeholder="Type any word to search for SEO tools...">
+                                    </label>
+                                    <div class="search_drop_box n_search_drop_box" style="display: none;">
+                                        <ul></ul>
+                                    </div>
+                                </li>
+                                <li class="last_notify_id" data-notify_id=""> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div style="padding-right:0px !important;padding-left:0px !important; padding-bottom:0px !important;padding-top:0px !important;"
+        class="container-fluid mob_pading p10 ">
+
+        <div class="container-fluid pn">
+            <div class="col-md-12 col-lg-12 padding0">
+
+                <div class="main-content roshu mob_pading main_content_full">
+                    <div class="col-md-12 col-xs-12">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 col-lg-12" id="alerts">
+                    </div>
+                    <style>
+                        ul {
+                            list-style: none;
+                        }
+
+                        .list ul li::before {
+                            content: "\2022";
+                            color: #ea5050;
+                            font-weight: bold;
+                            display: inline-block;
+                            width: 1em;
+                            margin-left: -2em;
+                            font-size: 20px;
+                        }
+
+                        .line {
+                            background: #ea5050;
+                            height: 2px;
+                            width: 70px;
+                        }
+
+                        .bg_f1f1f1 {
+                            background-color: #f1f1f1;
+                        }
+
+                        .equally {
+                            min-height: 600px;
+                            display: flex;
+                            align-items: center;
+                            padding: 20px 0px;
+                        }
+
+                        .manage_img {
+                            align-items: center;
+                            display: flex;
+                        }
+
+                        .m0 {
+                            margin: 0px;
+                        }
+
+                        @media only screen and (max-width: 904px) {
+                            .manage_img {
+                                display: block;
+                            }
+
+                            .m0 {
+                                margin-top: 20px !important;
+                            }
+
+                            .mid {
+                                margin: 0px auto;
+                            }
+                        }
+
+                        .para>p {
+                            color: #505050 !important;
+                        }
+                    </style>
+                    <div class="container-fluid pn bg_f1f1f1">
+                        <div class="container">
+                            <div class="col-md-12 col-sm-12 pn h-200 text-center para">
+                                <h1 class="fs26 mb15 mt50">ABOUT US </h1>
+                                <div class="line mauto"></div>
+                                <p class="fs16 mt10">We are a team of effectually passionate MITAOE students. We build Small
+                                     Tools  as Cetrificate Verification System  to make the Internet a better place!.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid pn bg-white ">
+                        <div class="container">
+                            <div class="col-md-12 col-sm-12 pn text-center p30 para mob_pading">
+                                <h3 class="fs26 m0">THE Online CVTool STORY</h3>
+                                <div class="line mt15 mb15 mauto"></div>
+                                <p>We discovered that students nowadays fabricate fraudulent credentials and submit them
+to their respective colleges. The problem discovered during the verification of a
+student's certificate was so severe that companies were forced to pay large sums of
+money in order to verify the legitimacy of the certificate submitted to them during
+interviews. The manual technique of certificate checking always has a time lag. </p>
+                                Teachers and recruiters manually validate each student's or candidate's certificate, which
+takes a long time. This is what inspired us to create this online verification method. 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid pn bg_f1f1f1">
+                        <div class="container equally">
+                            <div class="col-md-12 text-left pn">
+                                <div class="col-md-6">
+                                    <img src="https://i.postimg.cc/7LxHX3Sr/glenn-carstens-peters-npx-XWg-Q33-ZQ-unsplash-1.jpg"
+                                        class="img-responsive mid">
+                                </div>
+                                <div class="col-md-6 para">
+                                    <h3 class="fs26 m0">OUR PROJECT</h3>
+                                    <div class="line mt15 mb15 "></div>
+                                    <p>Employers or other interested parties must come to the school or send members to validate
+unique credentials. Some employers have never done so, resulting in the recognition of forged
+credentials. The framework may be introduced as a separate portal (recommended) or merged
+into the institution's current official website. Some employers have never done so, resulting in
+the recognition of forged credentials. The framework may be introduced as a separate portal
+(recommended) or merged into the institution's current official website. The aim of this study is
+to create an online credential authentication system based on the testing mechanism used by the
+university to validate its results.</p>
+<p style="font-weight: 600;">OUR MAIN OBJECTIVES</p>
+                                    <p>To provides easy access for organizations to check for the validity of the certificate of
+their employees remotely</p>
+                                    <p>To design a system that can help to minimize the high rate of manipulation and
+falsification of certificates in higher institutions. </p>
+<p>To resolve the issue of manual verification of certificates. </p>
+<p>To easily confirm the authenticity of any certificate by students. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                    <div class="container-fluid pn bg_white">
+                        <div class="container equally">
+                            <div class="col-md-12 text-left pn manage_img">
+                                <div class="col-md-6 col-md-push-6">
+                                    <img src="https://i.postimg.cc/kMyxyN6V/john-schnobrich-2-FPjl-Ay-MQTA-unsplash.jpg" class="wp100">
+                                </div>
+                                <div class="col-md-6 col-md-pull-6 para">
+                                    <h3 class="fs26 m0">OUR USERS</h3>
+                                    <div class="line mt15 mb15 "></div>
+                                    <p>Over the years,Online certificate verification Tool has become the go-to platform for different groups of online users. Our ideal users include:</p>
+                                    <div class="col-md-6 col-sm-6 pn list">
+                                        <ul>
+                                            <li>Students</li>
+                                            <li>Teachers</li>
+                                            <li>institutions</li>
+                                            <li>Oraganizations</li>
+                                            <li>Comapines</li>
+                                            <li>employees</li>
+                                            <li>School</li>
+                                            <li>Colleges</li>
+                                            <li>universities</li>
+                                            <li>Educational domains</li>
+                                        </ul>
+                                    </div>
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid pn bg_f1f1f1">
+                        <div class="container">
+                            <div class="col-sm-12 col-md-12 col-lg-12 pn mb15 text-center  para">
+                                <h2 class="fs26 mb30 mt50">GET IN TOUCH!</h2>
+                                <div class="line mauto"></div>
+                                <p class="fs14 mt10">Got questions or ideas you'd like to share? Want to interview our CEO? Need help or support with any of our tools? Want to share a testimonial? Or just want to say hi?
+
+.</p>
+                                <p>You can always get in touch with us at<a href="mailto:support@.com"
+                                        class="color-ea5050 "> onlinecvtool@gmail.com</a>.</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="asseenon_bg sticky-stopper">
+        <div class="inerasseen container">
+            <div class="tool_heading text-center">
+                <h2>SUPPORTED CERTIFICATES</h2>
+                <div class="heading_border"></div>
+            </div>
+            <div class="mt15 pb15 text-center as_seen_box" id="add_as_seen_on">
+                <a class="aso1"></a>
+                <a class="aso2"></a>
+                <a class="aso3"></a>
+
+                <a class="aso4"></a>
+                <a class="aso5" "></a>
+               
+                
+            </div>
+        </div>
+    </div>
+     <div class="clearfix"></div>
+    <div class="f_intro_bg_test"></div>
+    <div class="clearfix"></div>
+     <footer>
+        <div class="f_intro_bg text-center">
+            <form class="navbar-form mn" action="https://smallseotools.com/register/">
+                <div class="col-md-6 col-sm-6 dtc pn lang_subscribe">
+                    <div class="equally_centralized">
+                        <img src="https://smallseotools.com/asets/images/form_subcribe_footer.png" width="80"
+                            height="63" class="f_icon" alt="image of sst subcriber">
+                        <span class="f_text">SUBSCRIBE TO OUR NEWSLETTER</span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 dtc pn">
+                    <div class="input-group">
+                        <input type="email" name="email" aria-label="Subscribe" placeholder="Enter your Email Address"
+                            class="form-control search_input">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default search_button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="f_description_bg text-center">
+            <div class="f_graph">
+                <div class="container">
+                    <div class="col-lg-1 col-md-1"></div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 f_logo_box f_contect pn">
+                        <a class="navbar-brand ptn bootom_sst_logo top_sst_logo" href="#"
+                            title="SmallSEOTools.com"></a>
+                        <div class="contect_info col-xs-12 pn">
+                            <p>CONTACT US</p>
+                            <span>onlinecvtool@gmail.com</span>
+                        </div>
+                        <div class="address_info col-xs-12 pn">
+                            <p>ADDRESS</p>
+                            <span>Dehu Phata, <br>MITAOE <br>Alandi,Pune</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 lef_to_right_border f_version">
+                        <p>PROJECT OF  <br> MITAOE STUDENTS </p>
+                        <a href="#" title="Plagiarism Checker Api">
+                            <div class="add_footer_icon f-api ver_img"  style="background-image:url({%static '/asets/images/v-icons.png' %})"></div>
+                        </a>
+                      
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 f_contect" style="min-height: 230px;">
+                        <div class="mor_pages">
+                            <ul class="pn">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms of Services</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">About us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12 pn">
+                <div class="p10 footer">
+                    <div class="container pn">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p class="text-center mn">Copyright © 2012-2021 by <a
+                                    href="#">Online Certificate Verification Tool</a> All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
+       
+    </footer>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+            <script src="//apis.google.com/js/client.js" gapi_processed="true"></script>
+
+            <script>
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#blah')
+                                .attr('src', e.target.result)
+                                .width('90%')
+                                .height('80%');
+
+                            $('.drop_sty_mob').hide();
+                            $('.img_sty').hide();
+
+
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+
+            <script>
+                dataLayer = [];
+                var _trrigger_code = '';
+                function removeError() { $(".error-popup-box").hide(); }
+                var base_url_path = '#';
+                $(window).on('load', function () {
+                    _trrigger_code = '1';
+                    var width = $(window).width();
+                    if (width < 768) {
+                        $('#accordion .panel-collapse').hide();
+                        var mob_search_html = $('#sidebar_search').html();
+                        $('#mob_search').html(mob_search_html);
+                    } else {
+                        $('#accordion .panel-collapse').addClass('in');
+                        var web_search_html = $('#mob_search').html();
+                        $('#mob_search').html('');
+                        $('#mob_search_bar').hide();
+                    }
+                });
+
+
+
+
+                // BUG POPUP JS START
+                $("#brIcon").on('click', function () {
+                    var pup = $("#BugReport");
+                    var html = "<script src='https://www.google.com/recaptcha/api.js'><\/script>";
+                    $("head").append(html);
+                    pup.show();
+                });
+                function hidePopup() {
+                    $("#BugReport").css('display', 'none');
+                }
+                function validateEmail(email) {
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                function validatebugcaptcha() {
+                    var bugemail = $("#bugemail").val();
+                    var bugsub = $("#bugsubject").val();
+                    var bugdesc = $("#bugdesc").val();
+                    var submitform = true;
+                    if (!validateEmail(bugemail)) {
+                        showModel('Error', 'Please enter valid email address.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugsub == 'undefined' || bugsub == '') {
+                        showModel('Error', 'Please add subject.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (typeof bugdesc == 'undefined' || bugdesc == '') {
+                        showModel('Error', 'Please add description.');
+                        submitform = false;
+                        grecaptcha.reset();
+                    }
+                    if (submitform) {
+                        $("#bugform").submit();
+                    }
+                }
+                // BUG POPUP JS END
+                if ($(window).width() <= 991 && $(window).width() >= 768) {
+                    $('li.searchbar.mob_hide').click(function () {
+                        $('#HeadSearch').slideToggle();
+                    });
+                }
+
+
+
+
+
+                $.fn.isInViewport = function () {
+                    var elementTop = $(this).offset().top;
+                    var elementBottom = elementTop + $(this).outerHeight();
+                    var viewportTop = $(window).scrollTop();
+                    var viewportBottom = viewportTop + $(window).height();
+                    return elementBottom > viewportTop && elementTop < viewportBottom;
+                };
+
+
+               
+
+
+
+
+            </script>
+
+
+
+
+
+</body>
+
+</html>
