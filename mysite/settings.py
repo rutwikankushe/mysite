@@ -27,6 +27,13 @@ SECRET_KEY = '89_^2t7^9@ase3-+ffpxd1brbmsd!bbyv8(@lyar(4ovo@dtlv'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','onlinecvtool.herokuapp.com']
+STATIC_URL = '/static/'
+if DEBUG:
+   STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+   ]
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
