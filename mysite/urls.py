@@ -32,8 +32,7 @@ urlpatterns = [
     url(r'^Contact_us', views.Contact_us, name="contactuspage"),
     url(r'^Terms_of_Service', views.Terms_of_Service, name="termsofservicepage"),
     url(r'^Online_Cerificate_Verification_Tool', views.Online_Cerificate_Verification_Tool, name="homepage"),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+   
    
    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
